@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router'
 
-export default function PodcastById() {
+export default function EpisodeById() {
   const router = useRouter()
   const { episodeId } = router.query
 

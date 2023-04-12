@@ -1,22 +1,19 @@
 import Image from 'next/image'
 import { NextPage } from 'next'
+import Link from 'next/link'
+import { GetStaticProps, GetStaticPaths } from 'next'
+import { getPodcastList } from '@/features/podcast/services'
+import { Podcast } from '@/features/podcast/types'
 
-type Podcast = {
-  category: object
-  id: { attributes: { ['im:id']: string } }
-  ['im:artist']: object
-  ['im:image']: Array<object>
-  ['im:name']: object
+export const getStaticPaths: GetStaticPaths = async () => {
+  return {
+    paths: [{ params: {} }],
+    fallback: true,
+  }
 }
 
-export async function getStaticProps() {
-  const res = await fetch(
-    'https://itunes.apple.com/us/rss/toppodcasts/limit=100/genre=1310/json'
-  )
-
-  const data = await res.json()
-  const podcastList: Podcast[] = data?.feed?.entry
-
+export const getStaticProps: GetStaticProps = async () => {
+  const { podcastList } = await getPodcastList()
   return {
     props: { podcastList },
     revalidate: 1,
@@ -25,27 +22,33 @@ export async function getStaticProps() {
 
 const PodcastItem = ({ podcast }: { podcast: Podcast }) => {
   return (
-    <div>
-      {podcast['im:name'].label}
-      <Image
-        src={podcast['im:image'][2].label}
-        alt="Next.js Logo"
-        width={podcast['im:image'][2].attributes.height}
-        height={podcast['im:image'][2].attributes.height}
-      ></Image>
-      {podcast['im:artist'].label}
-    </div>
+    <Link href={podcast.link}>
+      <div className="flex justify-end items-center flex-col gap-2 mb-40  h-44 mx-1 px-2 shadow-md relative border-y-2 cursor-pointer">
+        <Image
+          className="rounded-full absolute -top-20"
+          src={podcast.image}
+          alt="Next.js Logo"
+          width={170}
+          height={170}
+        ></Image>
+        <div className="w-56 text-center mb-5">
+          <p className=" text-base font-serif break-words truncate hover:text-clip">
+            {podcast.name}
+          </p>
+          <p className=" text-sm break-words truncate hover:text-clip">
+            {podcast.author}
+          </p>
+        </div>
+      </div>
+    </Link>
   )
 }
 
 const PodcastList: NextPage<{ podcastList: Podcast[] }> = ({ podcastList }) => {
   return (
-    <div className="flex min-h-screen flex-col items-center justify-between p-24">
+    <div className="flex min-h-screen flex-row flex-wrap items-center justify-between p-24 bg-white text-black">
       {podcastList.map((podcast) => (
-        <PodcastItem
-          podcast={podcast}
-          key={podcast.id.attributes['im:id']}
-        ></PodcastItem>
+        <PodcastItem podcast={podcast} key={podcast.id}></PodcastItem>
       ))}
     </div>
   )
