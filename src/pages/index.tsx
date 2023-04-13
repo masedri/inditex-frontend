@@ -1,56 +1,54 @@
-import Image from 'next/image'
-import { NextPage } from 'next'
-import Link from 'next/link'
-import { GetStaticProps, GetStaticPaths } from 'next'
+import { GetStaticProps } from 'next'
 import { getPodcastList } from '@/features/podcast/services'
 import { Podcast } from '@/features/podcast/types'
-
-export const getStaticPaths: GetStaticPaths = async () => {
-  return {
-    paths: [{ params: {} }],
-    fallback: true,
-  }
-}
+import { Container } from '@/components/containers'
+import { PodcastItem } from '@/components/podcast/PodcastItem'
+import { useState } from 'react'
 
 export const getStaticProps: GetStaticProps = async () => {
   const { podcastList } = await getPodcastList()
+
   return {
     props: { podcastList },
-    revalidate: 1,
+    revalidate: 60, // 1 min
   }
 }
 
-const PodcastItem = ({ podcast }: { podcast: Podcast }) => {
+export default function PodcastList({ podcastList }: { podcastList: Podcast[] }) {
+  const [state, setstate] = useState({
+    query: '',
+    list: podcastList,
+  })
+  const handleChange = (e: any) => {
+    const results = podcastList.filter((podcast) => {
+      if (e.target.value === '') return podcast
+      return (
+        podcast.name.toLowerCase().includes(e.target.value.toLowerCase()) ||
+        podcast.author.toLowerCase().includes(e.target.value.toLowerCase())
+      )
+    })
+    setstate({
+      query: e.target.value,
+      list: results,
+    })
+  }
   return (
-    <Link href={podcast.link}>
-      <div className="flex justify-end items-center flex-col gap-2 mb-40  h-44 mx-1 px-2 shadow-md relative border-y-2 cursor-pointer">
-        <Image
-          className="rounded-full absolute -top-20"
-          src={podcast.image}
-          alt="Next.js Logo"
-          width={170}
-          height={170}
-        ></Image>
-        <div className="w-56 text-center mb-5">
-          <p className=" text-base font-serif break-words truncate hover:text-clip">
-            {podcast.name}
-          </p>
-          <p className=" text-sm break-words truncate hover:text-clip">
-            {podcast.author}
-          </p>
-        </div>
-      </div>
-    </Link>
+    <Container className="flex flex-col gap-44 h-full w-full items-center ">
+      <input
+        className="min-w-[500px] w-1/2 border-4 p-2 "
+        type="search"
+        placeholder="filter podcast"
+        value={state.query}
+        onChange={handleChange}
+      />
+      <section className="flex flex-row flex-wrap justify-center">
+        {state.list.map((podcast) => (
+          <PodcastItem
+            podcast={podcast}
+            key={podcast.id}
+          ></PodcastItem>
+        ))}
+      </section>
+    </Container>
   )
 }
-
-const PodcastList: NextPage<{ podcastList: Podcast[] }> = ({ podcastList }) => {
-  return (
-    <div className="flex min-h-screen flex-row flex-wrap items-center justify-between p-24 bg-white text-black">
-      {podcastList.map((podcast) => (
-        <PodcastItem podcast={podcast} key={podcast.id}></PodcastItem>
-      ))}
-    </div>
-  )
-}
-export default PodcastList
