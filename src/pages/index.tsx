@@ -10,7 +10,7 @@ export const getStaticProps: GetStaticProps = async () => {
 
   return {
     props: { podcastList },
-    revalidate: 120, // 1 min
+    revalidate: 86400, // 1 day
   }
 }
 

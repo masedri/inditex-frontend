@@ -12,7 +12,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const { episodeListByid, numberOfEpisodes } = await getEpisodesById({ id: params?.id as string })
   return {
     props: { episodeListByid, numberOfEpisodes },
-    revalidate: 120, // 2min
+    revalidate: 86400, // 1 day
   }
 }
 export const getStaticPaths: GetStaticPaths = async () => {
