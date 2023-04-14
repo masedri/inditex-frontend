@@ -19,7 +19,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const { podcastList = [] } = await getPodcastList()
   return {
     paths: podcastList.map((podcast) => ({ params: { id: podcast.id } })),
-    fallback: true,
+    fallback: false,
   }
 }
 /**  Get data from client Side
