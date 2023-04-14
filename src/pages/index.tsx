@@ -35,13 +35,13 @@ export default function PodcastList({ podcastList }: { podcastList: Podcast[] })
   return (
     <Container className="flex flex-col gap-44 h-full w-full items-center ">
       <input
-        className="min-w-[500px] w-1/2 border-4 p-2 "
+        className="min-w-[200px] w-1/2 border-4 p-2 "
         type="search"
         placeholder="filter podcast"
         value={state.query}
         onChange={handleChange}
       />
-      <section className="flex flex-row flex-wrap justify-center">
+      <section className="flex flex-row flex-wrap justify-center gap-y-36">
         {state.list.map((podcast) => (
           <PodcastItem
             podcast={podcast}

@@ -43,7 +43,7 @@ const useGetEpisodesById = () => {
 export default function PodcastView({ episodeListByid, numberOfEpisodes }: { episodeListByid: EpisodeById[]; numberOfEpisodes: string }) {
   // const { episodeListByid, numberOfEpisodes } = useGetEpisodesById()
   return (
-    <Container className="flex lg:flex-row lg:items-start flex-col items-center gap-20 ">
+    <Container className="flex lg:flex-row lg:items-start flex-col items-center gap-20">
       <PodcastCardDetail></PodcastCardDetail>
       <EpisodeView
         episodeListByid={episodeListByid}

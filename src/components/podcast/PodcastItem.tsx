@@ -11,7 +11,6 @@ export const PodcastItem = ({ podcast }: { podcast: Podcast }) => {
     <Link
       href={podcast.link}
       onClick={() => addPodcast(podcast)}
-      className="my-20"
     >
       <Card className="relative w-56 h-44 flex justify-end items-center flex-col mx-3 px-2">
         <Image

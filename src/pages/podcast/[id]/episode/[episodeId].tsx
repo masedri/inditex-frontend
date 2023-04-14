@@ -12,9 +12,9 @@ export default function EpisodeById() {
   const cleanHTML = sanitaze(description as string)
 
   return (
-    <Container className="flex lg:flex-row lg:items-start flex-col items-center gap-20">
+    <Container className="flex lg:flex-row lg:items-start flex-col items-center gap-20  ">
       <PodcastCardDetail></PodcastCardDetail>
-      <Card className="flex flex-col gap-5 p-5 w-full">
+      <Card className="flex flex-col gap-5 p-5 h-full w-full min-w-[384px]">
         <div className="text-xl font-bold capitalize">{trackName}</div>
         <p
           className="whitespace-pre-line max-h-96 overflow-y-auto"
