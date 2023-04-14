@@ -61,6 +61,7 @@ This is a list of proposed improvements for the Inditex Frontend project.
 - [ ] Add transitions between views to make the user experience more smooth and visually appealing.
 - [ ] Implement a CI/CD pipeline to automate the build, testing, and deployment processes. This would increase efficiency and reduce the risk of errors when deploying changes to the production environment.
 - [ ] Update to the new way of working with [app directory](https://blog.logrocket.com/next-js-13-app-directory/) in Next.js 13.
+- [ ] Add changelog and sematic versioning
 
 ## Thoughts
 
