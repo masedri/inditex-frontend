@@ -2,7 +2,6 @@ import { Card } from '@/components/Card'
 import Image from 'next/image'
 import { usePodcastContext } from '@/features/podcast/context'
 import { sanitaze } from '@/helpers'
-import Link from 'next/link'
 import { useRouter } from 'next/router'
 
 export const PodcastCardDetail = () => {

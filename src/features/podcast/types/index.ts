@@ -21,7 +21,6 @@ export type EpisodeById = {
   trackName: string
   description?: string
   episodeUrl?: string
-  numberOfEpisodes?: string
   link: string
 }
 

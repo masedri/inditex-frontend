@@ -2,8 +2,13 @@ import { Card } from '@/components/Card'
 import { EpisodeById } from '@/features/podcast/types'
 import Link from 'next/link'
 
-export const EpisodeView = ({ episodeListByid }: { episodeListByid: EpisodeById[] }) => {
-  const numberOfEpisodes = episodeListByid?.map((episode) => episode.numberOfEpisodes)[0]
+export const EpisodeView = ({
+  episodeListByid,
+  numberOfEpisodes,
+}: {
+  episodeListByid: EpisodeById[] | undefined
+  numberOfEpisodes: string
+}) => {
   return (
     <div className="flex flex-col gap-5 w-full">
       <Card className="p-3">

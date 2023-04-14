@@ -10,7 +10,7 @@ export const normalizationPodcastList = (podcasList: PodcastResponse[]) => {
     description: podcast.summary.label,
   }))
 }
-export const normalizationPodcasstById = (podcastById: EpisodeById[], count: string, id: string) => {
+export const normalizationPodcasstById = (podcastById: EpisodeById[], id: string) => {
   return podcastById.map((episode: EpisodeById) => ({
     trackId: episode.trackId,
     releaseDate: new Date(episode.releaseDate).toLocaleDateString('en-US'),
@@ -18,7 +18,6 @@ export const normalizationPodcasstById = (podcastById: EpisodeById[], count: str
     description: episode?.description || '',
     trackTimeMillis: new Date(episode?.trackTimeMillis || 0).toISOString().slice(11, 19),
     episodeUrl: episode?.episodeUrl || '',
-    numberOfEpisodes: count,
     link: `/podcast/${id}/episode/${episode.trackId}`,
   }))
 }
