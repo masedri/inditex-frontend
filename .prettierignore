@@ -3,3 +3,8 @@
 **/.hg
 **/node_modules
 **/.next
+#ignore all
+/*
+#but don't ignore files or directories at root called src
+!/src
+
