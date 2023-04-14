@@ -2,11 +2,12 @@ import { Card } from '@/components/Card'
 import { EpisodeById } from '@/features/podcast/types'
 import Link from 'next/link'
 
-export const EpisodeView = ({ podcastById }: { podcastById: EpisodeById[] }) => {
+export const EpisodeView = ({ episodeListByid }: { episodeListByid: EpisodeById[] }) => {
+  const numberOfEpisodes = episodeListByid?.map((episode) => episode.numberOfEpisodes)[0]
   return (
     <div className="flex flex-col gap-5 w-full">
       <Card className="p-3">
-        <div className="text-2xl font-sans font-bold">Episodes: {podcastById[0]?.numberOfEpisodes}</div>
+        <div className="text-2xl font-sans font-bold">Episodes: {numberOfEpisodes}</div>
       </Card>
       <Card className="p-5 h">
         <section className="flex justify-between p-3 font-bold border-b-4">
@@ -17,7 +18,7 @@ export const EpisodeView = ({ podcastById }: { podcastById: EpisodeById[] }) => 
           </div>
         </section>
         <ul className="flex flex-col w-full divide-y-2 overflow-y-auto max-h-[900px] scroll-smooth  ">
-          {podcastById.map((episode, index) => {
+          {episodeListByid?.map((episode, index) => {
             return (
               <li
                 key={episode.trackId}
