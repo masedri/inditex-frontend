@@ -41,7 +41,7 @@ The project uses the following technologies and frameworks:
 
 The project follows the Next.js conventions for file structure, including the `pages` directory for routes, and the `public` directory for static files. It also uses Tailwind CSS for styling, which is integrated with Next.js via a custom `_app.js` file.
 
-Client-side filtering is implemented with the `fetch` API, which retrieves data from a REST API provided by the backend. Server-side rendering is achieved with Incremental Static Regeneration (ISR), which allows pages to be regenerated in the background at a specified interval, providing the user with the latest data while maintaining high performance.
+Client-side filtering is implemented with the `fetch` API, which retrieves data from a REST API provided by the backend. Server-side rendering is achieved with Incremental Static Regeneration (ISR), which allows pages to be regenerated in the background at a specified interval (revalidate), providing the user with the latest data while maintaining high performance.
 
 The project is written in TypeScript, which provides static type checking and improved code quality. Code formatting is enforced with Prettier, and linting with ESLint, using the recommended configuration for Next.js projects.
 
@@ -60,6 +60,7 @@ This is a list of proposed improvements for the Inditex Frontend project.
 - [ ] Add automated tests to ensure that new features and bug fixes do not introduce regressions.
 - [ ] Add transitions between views to make the user experience more smooth and visually appealing.
 - [ ] Implement a CI/CD pipeline to automate the build, testing, and deployment processes. This would increase efficiency and reduce the risk of errors when deploying changes to the production environment.
+- [ ] Update to the new way of working with [app directory](https://blog.logrocket.com/next-js-13-app-directory/) in Next.js 13.
 
 ## Thoughts
 
